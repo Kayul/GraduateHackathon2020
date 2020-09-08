@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="T-AI pollution">
+        <link rel="stylesheet" type="text/css" href="index.css" />
+    </head>
+
+    <body>
+        <!-- navbar -->
+        <div>
+            <ul class='navbar'>
+                <li class='hover'><button type="button">Table</button></li>
+                <li class='hover'><button type="button">Map</button></li>
+                <li class='hover'><button type="button">Filter</button></li>
+                <li class='hover'><button type="button">Refresh</button></li>
+            </ul>
+            <!-- navbar end -->
+        </div>
+        <div>
+            <table name="dataTable" class="dataTable">
+                <tr>
+                    <th>ID</th>
+                    <th>Long</th>
+                </tr>
+                <tr>
+                    <td>test</td>
+                    <td>test</td>
+            </table>
+        </div>
+        <!-- <h1>{{data}}</h1>-->
+
+    </body>
+
+</html>
+
+
+<script type="module" type="text/javascript">
+    import { dataControl } from '/dataControl.js';
+    let testObj = new dataControl();
+</script>
