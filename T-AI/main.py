@@ -1,6 +1,13 @@
 # Code written by Kyle
 print("Program starting...")
 
+import json
+import pathlib
+import os
+import flask
+from flask import Flask, request, render_template
+from flask import jsonify
+
 from datetime import datetime
 
 
@@ -44,14 +51,14 @@ class Device:
         return self.uploadTime
 
     def serialize(self):
-        return 
-        {
-            'DeviceID': self.deviceID,
-            'PollutionLevel': self.pollutionLevel,
-            'TimeStamp': self.uploadTime,
-            'Longitude': self.location.getLong(),
-            'Latitude': self.location.getLat()
+        data = {
+            "DeviceID": self.deviceID,
+            "PollutionLevel": self.pollutionLevel,
+            "TimeStamp": self.uploadTime,
+            "Longitude": self.location.getLong(),
+            "Latitude": self.location.getLat()
         }
+        return data
 
 
 deviceList = []
@@ -117,3 +124,28 @@ print("Get Device: {0}".format(getDeviceFromID(16).getDataAsString()))
 
 # DEBUG: Print memory location of each device in the device list
 print(deviceList)
+
+data = {
+
+    "uploadTime": "18:36",
+    "id": "3",
+    "GPS": 3,
+    "pollution": 4
+}
+
+# API Functionality
+p = os.path.dirname(os.path.realpath(__file__))
+p = os.path.join(p, "index.html")
+
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
+@app.route("/")
+@app.route("/api")
+@app.route("/index", methods=['GET', 'POST', 'PUT'])
+
+def getAllData():
+    device = getDeviceFromID(16)
+    print(device.serialize())
+    return jsonify(device.serialize())
+
+app.run()
